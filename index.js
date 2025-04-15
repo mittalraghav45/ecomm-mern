@@ -50,7 +50,7 @@ app.get("/products",async(req,resp)=>{
 })
 
 app.delete("/product/:id",async (req,resp)=>{
- resp.send('working',req.params.id);
+//  resp.send('working',req.params.id);
  const result = await Product.deleteOne({_id:req.params.id});
  resp.send(result);
 })
