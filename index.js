@@ -39,6 +39,21 @@ app.post("/add-product",async (req,res)=>{
   let result = await product.save();
   res.send(result)
 })
+
+app.get("/products",async(req,resp)=>{
+  let products= await Product.find();
+  if(products.length>0){
+    resp.send(products);
+    }else{
+      resp.send({result:"No products Found"})
+  }
+})
+
+app.delete("/product/:id",async (req,resp)=>{
+ resp.send('working',req.params.id);
+ const result = await Product.deleteOne({_id:req.params.id});
+ resp.send(result);
+})
 // Start the server on port 5000
 app.listen(5000, () => {
   console.log("Server running on port 5000");
