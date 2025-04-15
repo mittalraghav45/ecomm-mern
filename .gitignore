@@ -1,0 +1,15 @@
+# Ignore node_modules folder
+node_modules/
+
+# Ignore build outputs (if using create-react-app)
+build/
+
+# Ignore environment variables
+.env
+
+# Optional: Ignore VSCode settings and logs
+.vscode/
+*.log
+
+# To ignore src folder (not common, but you can do it)
+#src/
