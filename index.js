@@ -73,6 +73,11 @@ app.put("/product/:id", async (req, res) => {
   res.send(result);
 });
 
+
+app.get('/search/:key',(req,res)=>{
+  
+})
+
 // Start the server on port 5000
 app.listen(5000, () => {
   console.log("Server running on port 5000");
