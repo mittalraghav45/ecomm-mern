@@ -4,6 +4,11 @@ const cors = require("cors");
 require("./BACKEND/db/config");
 const User = require("./BACKEND/db/User");
 const Product = require("./BACKEND/db/Product");
+
+const JWT = require('jsonwebtoken');
+const jwtKey='e-comm'; //it is a secret key
+
+
 const app = express();
 
 app.use(express.json());
