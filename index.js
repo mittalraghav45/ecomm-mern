@@ -96,7 +96,7 @@ app.put("/product/:id", async (req, res) => {
   res.send(result);
 });
 
-app.get("/search/:key", async (req, res) => {
+app.get("/search/:key", verifyToken,async (req, res) => {
   let result = await Product.find({
     $or: [
       {
@@ -109,6 +109,10 @@ app.get("/search/:key", async (req, res) => {
 
   res.send(result);
 });
+
+function verifyToken(req,resp,next){
+  console.log('middleware')
+}
 
 // Start the server on port 5000
 app.listen(5000, () => {
