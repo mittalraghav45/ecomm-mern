@@ -32,7 +32,11 @@ app.post("/register", async (req, res) => {
       }
   }) 
 })
-
+//{
+  // "name":"Mittal",
+  // "email":"mittal@gmail.com",
+  // "password":"Mittal"
+  // }
 
 app.post("/login", async (req, res) => {
   let user = await User.findOne(req.body).select("-password");
