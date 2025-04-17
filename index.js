@@ -5,7 +5,7 @@ require("./BACKEND/db/config");
 const User = require("./BACKEND/db/User");
 const Product = require("./BACKEND/db/Product");
 
-const JWT = require('jsonwebtoken');
+const Jwt = require('jsonwebtoken');
 const jwtKey='e-comm'; //it is a secret key
 
 
@@ -16,25 +16,39 @@ app.use(cors());
 
 // Route to handle user registration
 app.post("/register", async (req, res) => {
-  try {
+  
     let user = new User(req.body);
     let result = await user.save();
-    res.status(201).send({ result });
-  } catch (err) {
-    res
-      .status(500)
-      .send({ error: "Registration failed", message: err.message });
-  }
-});
+    result=result.toObject();
+    delete result.password;
+    Jwt.sign({result},jwtKey,
+      {expiresIn:"2h"},(err,token)=>{
+        
+      if(err){
+        res.send({result:"Something went wrong"});
+      }
+      else{        
+      res.send({result, auth:token });
+      }
+  }) 
+})
+
 
 app.post("/login", async (req, res) => {
   let user = await User.findOne(req.body).select("-password");
   if (req.body.email && req.body.password) {
     if (user) {
-      res.status(200).json({ user });
-    } else {
-      res.status(401).json({ message: "Invalid credentials" });
-    }
+      Jwt.sign({user},jwtKey,{expiresIn:"2h"},(err,token)=>{
+        
+        if(err){
+          res.send("Something went wrong");
+        }
+        else{        
+        res.send({user, auth:token });
+        }
+      })
+     
+    } 
   }
 });
 
