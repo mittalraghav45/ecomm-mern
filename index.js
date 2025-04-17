@@ -101,7 +101,6 @@ app.get("/search/:key", verifyToken, async (req, res) => {
 
   res.send(result);
 });
-//vikrant shampoo india , spare rooms notification on, workday timesheet,, alexa what generation i sthe remote
 
 function verifyToken(req, resp, next) {
   let token = req.headers["authorization"];
